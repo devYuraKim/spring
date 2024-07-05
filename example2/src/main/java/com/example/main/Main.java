@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
         var context = new AnnotationConfigApplicationContext(ProjectConfig.class);
-        var veh = context.getBean(Vehicle.class);
+        //var veh = context.getBean(Vehicle.class);
         /**NoUniqueBeanDefinitionException:
          * No qualifying bean of type 'com.example.beans.Vehicle' available
          * : expected single matching bean but found 3: vehicle1,vehicle2,vehicle3*/
