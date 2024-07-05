@@ -14,6 +14,8 @@ public class Vehicle {
     }
 
     //Factory pattern
+    //Problem1: still when changes are needed, you have to come to this code to do so.
+    //Problem2: boilerplate code for setting up factory classes
     public void makeVehicle2(){
         SpeakerFactory speakerFactory = new SpeakerFactory();
         Speakers speakers = speakerFactory.getSpeaker("bose");
