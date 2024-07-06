@@ -13,8 +13,7 @@ To tell Spring it needs to search for classes annotated with stereotype annotati
 we use the @ComponentScan annotation over the configuration class.
 * */
 @Configuration
-@ComponentScan(basePackages = {"com.example.implementation",
-        "com.example.services", "com.example.aspects"})
+@ComponentScan(basePackages = {"com.example.implementation", "com.example.services", "com.example.aspects"})
 @EnableAspectJAutoProxy //AOP activation
 public class ProjectConfig {
 

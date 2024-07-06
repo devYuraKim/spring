@@ -7,8 +7,6 @@ import com.example.model.Song;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,9 +22,9 @@ public class VehicleServices {
     @LogAspect
     public String playMusic(boolean vehicleStarted, Song song){
         //checking execution time
-        Instant start = Instant.now();
+        //Instant start = Instant.now();
         //logging
-        logger.info("method execution start");
+        //logger.info("method execution start");
         String music = null;
         //checking if vehicle started - security check
         if(vehicleStarted){
@@ -34,16 +32,16 @@ public class VehicleServices {
         }else{
             logger.log(Level.SEVERE,"Vehicle not started to perform the operation");
         }
-        logger.info("method execution end");
-        Instant finish = Instant.now();
-        long timeElapsed = Duration.between(start, finish).toMillis();
-        logger.info("Time took to execute the method : "+timeElapsed);
+        //logger.info("method execution end");
+        //Instant finish = Instant.now();
+        //long timeElapsed = Duration.between(start, finish).toMillis();
+        //logger.info("Time took to execute the method : "+timeElapsed);
         return speakers.makeSound(song);
     }
 
     public String moveVehicle(boolean vehicleStarted){
-        Instant start = Instant.now();
-        logger.info("method execution start");
+        //Instant start = Instant.now();
+        //logger.info("method execution start");
         String status = null;
         if(vehicleStarted){
             status = tyres.rotate();
@@ -51,26 +49,26 @@ public class VehicleServices {
             logger.log(Level.SEVERE,"Vehicle not started to perform the" +
                     " operation");
         }
-        logger.info("method execution end");
-        Instant finish = Instant.now();
-        long timeElapsed = Duration.between(start, finish).toMillis();
-        logger.info("Time took to execute the method : "+timeElapsed);
+        //logger.info("method execution end");
+        //Instant finish = Instant.now();
+        //long timeElapsed = Duration.between(start, finish).toMillis();
+        //logger.info("Time took to execute the method : "+timeElapsed);
         return tyres.rotate();
     }
 
     public String applyBrake(boolean vehicleStarted){
-        Instant start = Instant.now();
-        logger.info("method execution start");
+        //Instant start = Instant.now();
+        //logger.info("method execution start");
         String status = null;
         if(vehicleStarted){
             status = tyres.stop();
         }else{
             logger.log(Level.SEVERE,"Vehicle not started to perform the operation");
         }
-        logger.info("method execution end");
-        Instant finish = Instant.now();
-        long timeElapsed = Duration.between(start, finish).toMillis();
-        logger.info("Time took to execute the method : "+timeElapsed);
+        //logger.info("method execution end");
+        //Instant finish = Instant.now();
+        //long timeElapsed = Duration.between(start, finish).toMillis();
+        //logger.info("Time took to execute the method : "+timeElapsed);
         return tyres.stop();
     }
 
