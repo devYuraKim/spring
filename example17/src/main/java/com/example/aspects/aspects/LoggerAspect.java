@@ -38,6 +38,7 @@ public class LoggerAspect {
         logger.info(joinPoint.getSignature().toString() + " method execution end");
     }
 
+    //AOP with annotation
     @Around("@annotation(com.example.interfaces.LogAspect)")
     public void logWithAnnotation(ProceedingJoinPoint joinPoint) throws Throwable {
         logger.info(joinPoint.toString() + " method execution start");
