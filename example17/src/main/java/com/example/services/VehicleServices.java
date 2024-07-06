@@ -36,39 +36,41 @@ public class VehicleServices {
         //Instant finish = Instant.now();
         //long timeElapsed = Duration.between(start, finish).toMillis();
         //logger.info("Time took to execute the method : "+timeElapsed);
-        return speakers.makeSound(song);
+        return music;
+        //return speakers.makeSound(song);
     }
 
     public String moveVehicle(boolean vehicleStarted){
         //Instant start = Instant.now();
         //logger.info("method execution start");
-        String status = null;
-        if(vehicleStarted){
-            status = tyres.rotate();
-        }else{
-            logger.log(Level.SEVERE,"Vehicle not started to perform the" +
-                    " operation");
-        }
+        //String status = null;
+        //if(vehicleStarted){
+        //    status = tyres.rotate();
+        //}else{
+        //    logger.log(Level.SEVERE,"Vehicle not started to perform the operation");
+        //}
         //logger.info("method execution end");
         //Instant finish = Instant.now();
         //long timeElapsed = Duration.between(start, finish).toMillis();
         //logger.info("Time took to execute the method : "+timeElapsed);
+        //return status;
         return tyres.rotate();
     }
 
     public String applyBrake(boolean vehicleStarted){
         //Instant start = Instant.now();
         //logger.info("method execution start");
-        String status = null;
-        if(vehicleStarted){
-            status = tyres.stop();
-        }else{
-            logger.log(Level.SEVERE,"Vehicle not started to perform the operation");
-        }
+        //String status = null;
+        //if(vehicleStarted){
+        //    status = tyres.stop();
+        //}else{
+        //    logger.log(Level.SEVERE,"Vehicle not started to perform the operation");
+        //}
         //logger.info("method execution end");
         //Instant finish = Instant.now();
         //long timeElapsed = Duration.between(start, finish).toMillis();
         //logger.info("Time took to execute the method : "+timeElapsed);
+        //return status;
         return tyres.stop();
     }
 
