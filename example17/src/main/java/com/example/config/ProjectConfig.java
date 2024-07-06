@@ -15,7 +15,7 @@ we use the @ComponentScan annotation over the configuration class.
 @Configuration
 @ComponentScan(basePackages = {"com.example.implementation",
         "com.example.services", "com.example.aspects"})
-@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy //AOP activation
 public class ProjectConfig {
 
 }

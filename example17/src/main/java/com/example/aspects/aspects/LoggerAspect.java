@@ -14,7 +14,7 @@ import java.time.Instant;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@Aspect
+@Aspect //Aspected bean이라는 표시
 @Component
 @Order(2)
 public class LoggerAspect {
@@ -22,7 +22,11 @@ public class LoggerAspect {
     private Logger logger = Logger.getLogger(LoggerAspect.class.getName());
 
     @Around("execution(* com.example.services.*.*(..))")
+    //어떤 method를 intercept할 것인가
+    //execution(modifiers-pattern? returnType-pattern delcaringType-pattern? name-pattern(param-pattern) throws-pattern?)
+    //any returnType:*, any class within package: services.*, any methods+parameters:*(..)
     public void log(ProceedingJoinPoint joinPoint) throws Throwable {
+        //Aspect logic을 method 내용으로 작성
         logger.info(joinPoint.getSignature().toString() + " method execution start");
         Instant start = Instant.now();
         joinPoint.proceed();
