@@ -6,6 +6,7 @@ import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
@@ -15,7 +16,7 @@ import java.util.logging.Logger;
 
 @Aspect //Aspected bean이라는 표시
 @Component
-//@Order(2)
+@Order(2)
 public class LoggerAspect {
 
     private Logger logger = Logger.getLogger(LoggerAspect.class.getName());
