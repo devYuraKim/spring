@@ -2,19 +2,19 @@ package com.devyurakim.devschool.controller;
 
 import com.devyurakim.devschool.model.Contact;
 import com.devyurakim.devschool.service.ContactService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@Slf4j
 @Controller
 public class ContactController {
 
 
     //Logger log = LoggerFactory.getLogger(this.getClass().getName());
-    private static Logger log = LoggerFactory.getLogger(ContactController.class);
+    //private static Logger log = LoggerFactory.getLogger(ContactController.class);
 
     @Autowired
     private final ContactService contactService;
