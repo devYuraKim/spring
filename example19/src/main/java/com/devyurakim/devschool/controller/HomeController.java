@@ -10,7 +10,7 @@ public class HomeController {
     @RequestMapping(value = {"", "/", "home"})
     public String displayHomePage(Model model){
         //Model: Interface acting as a container for data
-        model.addAttribute("username", "John Doe");
+        model.addAttribute("username", "Yura Kim");
         return "home.html";
     }
 
