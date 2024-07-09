@@ -46,25 +46,33 @@ Author URL: http://w3layouts.com
         <div class="row contact-block">
             <div class="col-md-7 contact-right">
                 <!-- form -->
-                <form th:action="@{/saveMsg}" method="post" class="signin-form">
+                <form th:action="@{/saveMsg}" method="post" class="signin-form" th:object="${contact}">
+                <!--th:object는 form fields를 model attribute에 binding하는 Thymeleaf attribute임-->
                     <div class="input-grids">
                         <div class="row">
                             <div class="col-sm-6">
-                                <input type="text" name="name" id="name" placeholder="Your Name" required="true"
-                                       class="contact-input" />
+                                <!--name="name" id="name" 대신 th:field="*{property}"로 form field와 object의 data binding-->
+                                <input type="text" th:field="*{name}" placeholder="이름" class="contact-input" />
+                                <div class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
                             </div>
+
                             <div class="col-sm-6">
-                                <input type="text" name="mobileNum" id="mobileNum" placeholder="Your Mobile Number"
-                                       class="contact-input" />
+                                <input type="text" th:field="*{mobileNum}" placeholder="휴대전화번호" class="contact-input" />
+                                <div class="alert alert-danger" th:if="${#fields.hasErrors('mobileNum')}" th:errors="*{mobileNum}"></div>
                             </div>
                         </div>
-                        <input type="email" name="email" id="email" placeholder="Your Email" required="true"
-                               class="contact-input" />
-                        <input type="text" name="subject" id="subject" placeholder="Subject"
-                               class="contact-input" />
+
+                        <input type="text" th:field="*{email}" placeholder="이메일" class="contact-input" />
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+
+                        <input type="text" th:field="*{subject}" placeholder="메시지 제목" class="contact-input" />
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}"></div>
+
                     </div>
                     <div class="form-input">
-                        <textarea name="message" id="message" placeholder="Type your message here"></textarea>
+                        <textarea th:field="*{message}" placeholder="메시지 내용"></textarea>
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></div>
+
                     </div>
                     <div class="text-start">
                         <button class="btn btn-style btn-style-3">Send Message</button>
