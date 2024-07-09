@@ -18,7 +18,7 @@ public class ProjectSecurityConfig {
         http.csrf(csrf->csrf.disable()) //csrf disabling for POST, PUT requests
                 .authorizeHttpRequests((requests) -> requests
                 .requestMatchers("/dashboard").authenticated()
-                .requestMatchers("/", "home").authenticated()
+                .requestMatchers("/", "home").permitAll()
                 .requestMatchers("/holidays/**").permitAll()
                 .requestMatchers("/contact").permitAll()
                 .requestMatchers("/saveMsg").permitAll()
@@ -26,7 +26,13 @@ public class ProjectSecurityConfig {
                 .requestMatchers("/about").permitAll()
                 .requestMatchers("/assets/**").permitAll()
                 )
-                .formLogin(Customizer.withDefaults())
+                .formLogin(loginConfigurer -> loginConfigurer.loginPage("/login")
+                        .defaultSuccessUrl("/dashboard")
+                        .failureUrl("/login?error=true")
+                        .permitAll())
+                .logout(logoutConfigurer -> logoutConfigurer
+                        .logoutSuccessUrl("/login?logout=true")
+                        .invalidateHttpSession(true).permitAll())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
 
