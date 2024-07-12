@@ -69,7 +69,7 @@ public class ContactController {
         public String displayMessages(Model model) {
             List<Contact> contactMsgs = contactService.findMsgsWithOpenStatus();
             model.addAttribute("contactMsgs",contactMsgs);
-            return "messages.html";
+            return "essages.html";
         }
 
         @GetMapping(value = "/closeMsg")
