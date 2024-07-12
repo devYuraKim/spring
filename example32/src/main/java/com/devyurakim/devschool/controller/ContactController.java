@@ -5,12 +5,13 @@ import com.devyurakim.devschool.service.ContactService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -57,10 +58,24 @@ public class ContactController {
                 //redisplay contact.html view with error messages (@Valid가 가능하게 함)
             }
             contactService.saveMessageDetails(contact);
-            contactService.setCounter(contactService.getCounter()+1);
-            log.info("Number of times contact form is submitted: "+contactService.getCounter());
+            //contactService.setCounter(contactService.getCounter()+1);
+            //log.info("Number of times contact form is submitted: "+contactService.getCounter());
             //ContactService가 @RequestScope면 매 HTTP request마다 counter가 0으로 refresh됨.
             //@SessionScope면 하나씩 증가되지만, cookie 삭제하면 counter가 0으로 refresh됨.
             return "redirect:/contact";
         }
+
+        @GetMapping("/displayMessages")
+        public String displayMessages(Model model) {
+            List<Contact> contactMsgs = contactService.findMsgsWithOpenStatus();
+            model.addAttribute("contactMsgs",contactMsgs);
+            return "messages.html";
+        }
+
+        @GetMapping(value = "/closeMsg")
+        public String closeMsg(@RequestParam int id, Authentication authentication) {
+            contactService.updateMsgStatus(id,authentication.getName());
+            return "redirect:/displayMessages";
+        }
+
 }

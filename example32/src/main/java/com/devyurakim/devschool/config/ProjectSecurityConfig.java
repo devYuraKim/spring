@@ -20,6 +20,8 @@ public class ProjectSecurityConfig {
                         .ignoringRequestMatchers(PathRequest.toH2Console())) //csrf disabling for POST, PUT requests
                 .authorizeHttpRequests((requests) -> requests
                 .requestMatchers("/dashboard").authenticated()
+                .requestMatchers("/displayMessages").hasRole("ADMIN")
+                .requestMatchers("/closeMsg/**").hasRole("ADMIN")
                 .requestMatchers("/", "home").permitAll()
                 .requestMatchers("/holidays/**").permitAll()
                 .requestMatchers("/contact").permitAll()

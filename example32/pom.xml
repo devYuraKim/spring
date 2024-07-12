@@ -78,6 +78,7 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
+		<!--jdbc api-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>

@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS `contact_msg` (
   `contact_id` int AUTO_INCREMENT  PRIMARY KEY,
   `name` varchar(100) NOT NULL,
-  `mobile_num` varchar(10) NOT NULL,
+  `mobile_num` varchar(11) NOT NULL,
   `email` varchar(100) NOT NULL,
   `subject` varchar(100) NOT NULL,
   `message` varchar(500) NOT NULL,

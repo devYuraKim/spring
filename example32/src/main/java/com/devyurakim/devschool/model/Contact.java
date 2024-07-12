@@ -13,8 +13,9 @@ import lombok.Data;
  * */
 
 @Data
-public class Contact {
+public class Contact extends BaseEntity{
 
+    private int contactId;
     /*
         * @NotNull: Checks if a given field is not null but allows empty values & zero elements inside collections.
           @NotEmpty: Checks if a given field is not null and its size/length is greater than zero.
@@ -39,5 +40,7 @@ public class Contact {
     @NotBlank(message="내용은 공란으로 둘 수 없습니다.")
     @Size(min=10, message="내용은 최소 10글자 이상이어야 합니다.")
     private String message;
+
+    private String status;
 
 }
