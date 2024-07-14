@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -55,23 +56,39 @@ public class ContactService {
         contact.setStatus(DevSchoolConstants.OPEN);
         contact.setCreatedBy(DevSchoolConstants.ANONYMOUS);
         contact.setCreatedAt(LocalDateTime.now());
-        int result = contactRepository.saveContactMsg(contact);
-        if(result>0) {
+//        int result = contactRepository.saveContactMsg(contact);
+//        if(result>0) {
+//            isSaved = true;
+//        }
+        Contact savedContact = contactRepository.save(contact);
+        if(savedContact != null && savedContact.getContactId()>0){
             isSaved = true;
         }
         return isSaved;
     }
 
     public List<Contact> findMsgsWithOpenStatus(){
-        List<Contact> contactMsgs = contactRepository.findMsgsWithStatus(DevSchoolConstants.OPEN);
+//        List<Contact> contactMsgs = contactRepository.findMsgsWithStatus(DevSchoolConstants.OPEN);
+        List<Contact> contactMsgs = contactRepository.findByStatus(DevSchoolConstants.OPEN);
         return contactMsgs;
     }
 
+    /*JPA에서 update할 때는 기존의 객체를 찾아와서 수정이 필요한 부분 처리하고 그 객체를 다시 저장*/
     public boolean updateMsgStatus(int contactId, String updatedBy){
         boolean isUpdated = false;
-        int result = contactRepository.updateMsgStatus(contactId,DevSchoolConstants.CLOSE, updatedBy);
-        if(result>0) {
-            isUpdated = true;
+//        int result = contactRepository.updateMsgStatus(contactId,DevSchoolConstants.CLOSE, updatedBy);
+//        if(result>0) {
+//            isUpdated = true;
+//        }
+        Optional<Contact> contact = contactRepository.findById(contactId);
+        contact.ifPresent(contact1 -> {
+            contact1.setStatus(DevSchoolConstants.CLOSE);
+            contact1.setUpdatedBy(updatedBy);
+            contact1.setUpdatedAt(LocalDateTime.now());
+        });
+        Contact updatedContact = contactRepository.save(contact.get());
+        if(updatedContact!=null && updatedContact.getUpdatedBy()!=null){
+            isUpdated=true;
         }
         return isUpdated;
     }
