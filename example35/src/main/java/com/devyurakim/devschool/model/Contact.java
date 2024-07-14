@@ -1,10 +1,12 @@
 package com.devyurakim.devschool.model;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 /**Spring Boot로 form input data와 POJO data binding을 자동으로 하려면
  * (0) spring-boot-starter-web dependency가 있어야 하고
@@ -13,8 +15,13 @@ import lombok.Data;
  * */
 
 @Data
+@Entity
+@Table(name="contact_msg")
 public class Contact extends BaseEntity{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name="native", strategy = "native") //maps a user defined sequence generator with hibernate session, 'native' is a pre-defined strategy
     private int contactId;
     /*
         * @NotNull: Checks if a given field is not null but allows empty values & zero elements inside collections.
