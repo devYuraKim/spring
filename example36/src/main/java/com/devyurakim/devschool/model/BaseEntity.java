@@ -26,7 +26,6 @@ public class BaseEntity {
     @CreatedBy
     @Column(updatable = false)
     private String createdBy;
-
     @LastModifiedDate
     @Column(insertable = false) //새로 추가(insert)할 때는 해당 column을 입력하지 못하도록 설정
     private LocalDateTime updatedAt;

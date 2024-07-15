@@ -1,3 +1,4 @@
+/* JPA로 변환하면서 무용해짐
 package com.devyurakim.devschool.rowmappers;
 
 import com.devyurakim.devschool.model.Contact;
@@ -28,3 +29,4 @@ public class ContactRowMapper implements RowMapper<Contact> {
         return contact;
     }
 }
+*/
