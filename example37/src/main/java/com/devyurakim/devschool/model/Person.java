@@ -12,16 +12,17 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Data
 @Entity
+/*you provide an array of @FieldsValueMatch annotations inside {}.*/
 @FieldsValueMatch.List({
         @FieldsValueMatch(
                 field = "pwd",
                 fieldMatch = "confirmPwd",
-                message = "Passwords do not match!"
+                message = "비밀번호 불일치!"
         ),
         @FieldsValueMatch(
                 field = "email",
                 fieldMatch = "confirmEmail",
-                message = "Email addresses do not match!"
+                message = "이메일 주소 불일치!"
         )
 })
 public class Person extends BaseEntity{
