@@ -29,6 +29,11 @@ public class FieldsValueMatchValidator
         (1) Private fields that are accessed through getter and setter methods.
         (2) Public no-argument constructor. */
 
+        /*BeanWrapperImpl allows you to work with object properties using their names as strings.
+        This is particularly useful in scenarios where you need to interact with properties dynamically,
+        especially when you don't know the property names at compile-time or
+        when you need to perform operations generically across multiple objects.*/
+
         Object fieldValue = new BeanWrapperImpl(value) //value object에 대해 BeanWrapperImple instance를 생성 > value object에 대한 properties와 dynamic하게 상호작용 가능함
                 .getPropertyValue(field); //value object의 field properties의 value를 회수함
         Object fieldMatchValue = new BeanWrapperImpl(value)
