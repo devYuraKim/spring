@@ -17,12 +17,12 @@ import org.hibernate.annotations.GenericGenerator;
         @FieldsValueMatch(
                 field = "pwd",
                 fieldMatch = "confirmPwd",
-                message = "비밀번호 불일치!"
+                message = "비밀번호 불일치"
         ),
         @FieldsValueMatch(
                 field = "email",
                 fieldMatch = "confirmEmail",
-                message = "이메일 주소 불일치!"
+                message = "이메일 주소 불일치"
         )
 })
 public class Person extends BaseEntity{
@@ -46,7 +46,7 @@ public class Person extends BaseEntity{
 
     @NotBlank(message="Confirm Email must not be blank")
     @Email(message = "Please provide a valid confirm email address" )
-    @Transient
+    @Transient //DB에 반영하지 않는 경우 사용
     private String confirmEmail;
 
     @NotBlank(message="Password must not be blank")
@@ -56,7 +56,7 @@ public class Person extends BaseEntity{
 
     @NotBlank(message="Confirm Password must not be blank")
     @Size(min=5, message="Confirm Password must be at least 5 characters long")
-    @Transient
+    @Transient //DB에 반영하지 않는 경우 사용
     private String confirmPwd;
 
     @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST, targetEntity = Roles.class)

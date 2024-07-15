@@ -44,9 +44,7 @@ Author URL: http://w3layouts.com
         </div>
         <div class="row login-block">
             <div class="col-md-7 login-center">
-                <ul>
-                    <li class="alert alert-danger" role="alert" th:each="error : ${#fields.errors('person.*')}" th:text="${error}" />
-                </ul>
+
                 <form th:action="@{/public/createUser}" method="post" class="signin-form" th:object="${person}">
                     <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
                         <p class="text-uppercase">Personal Details</p>
@@ -54,33 +52,45 @@ Author URL: http://w3layouts.com
                     <div class="input-grids">
                         <div class="row">
                             <div class="col-sm-6">
-                                <input type="text" th:field="*{name}" placeholder="Name"
+                                <input type="text" th:field="*{name}" placeholder="이름"
                                        class="contact-input" />
+                                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"> </div>
                             </div>
                             <div class="col-sm-6">
-                                <input type="text" th:field="*{mobileNumber}" placeholder="Mobile Number"
+                                <input type="text" th:field="*{mobileNumber}" placeholder="휴대전화 번호"
                                        class="contact-input" />
+                                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('mobileNumber')}" th:errors="*{mobileNumber}"> </div>
+
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
-                                <input type="text" th:field="*{email}" placeholder="Email"
+                                <input type="text" th:field="*{email}" placeholder="이메일"
                                        class="contact-input" />
+                                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> </div>
+
                             </div>
                             <div class="col-sm-6">
-                                <input type="text" th:field="*{confirmEmail}" placeholder="Confirm Email"
+                                <input type="text" th:field="*{confirmEmail}" placeholder="이메일 확인"
                                        class="contact-input" />
+                                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('confirmEmail')}" th:errors="*{confirmEmail}"> </div>
+
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
-                                <input type="password" th:field="*{pwd}" placeholder="Password"
+                                <input type="password" th:field="*{pwd}" placeholder="비밀번호"
                                        class="contact-input" />
+                                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('pwd')}" th:errors="*{pwd}"> </div>
+
                             </div>
                             <div class="col-sm-6">
-                                <input type="password" th:field="*{confirmPwd}" placeholder="Confirm Password"
+                                <input type="password" th:field="*{confirmPwd}" placeholder="비밀번호 확인"
                                        class="contact-input" />
+                                <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('confirmPwd')}" th:errors="*{confirmPwd}"> </div>
+
                             </div>
+
                         </div>
 
                     </div>
