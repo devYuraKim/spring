@@ -8,7 +8,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 @Data
 @Entity
@@ -29,7 +28,6 @@ public class Person extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO,generator="native")
-    @GenericGenerator(name = "native", strategy = "native")
     private int personId;
 
     @NotBlank(message="Name must not be blank")
@@ -59,11 +57,16 @@ public class Person extends BaseEntity{
     @Transient //DB에 반영하지 않는 경우 사용
     private String confirmPwd;
 
-//    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST, targetEntity = Roles.class)
-//    @JoinColumn(name = "role_id", referencedColumnName = "roleId",nullable = false)
-//    private Roles roles;
-//
-//    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL, targetEntity = Address.class)
-//    @JoinColumn(name = "address_id", referencedColumnName = "addressId",nullable = true)
-//    private Address address;
+    @OneToOne(cascade = CascadeType.PERSIST, targetEntity = Roles.class)
+    @JoinColumn(name = "role_id", referencedColumnName = "roleId", nullable = false)
+    private Roles roles;
+    /*cascade: propogate entity state changes from Parent to Child*/
+
+    /*Parent Entity에만 정의했으므로 uni-directional*/
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = Address.class)
+    @JoinColumn(name = "address_id", referencedColumnName = "addressId",nullable = true)
+    private Address address;
+    /*JoinColumn: specifies foreign key column
+    * name: name of the foreign key column
+    * referencedColumnName: field name of the target entity class*/
 }
