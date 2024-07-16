@@ -38,6 +38,9 @@ public @interface FieldsValueMatch {
 
     @Target({ ElementType.TYPE })
     @Retention(RetentionPolicy.RUNTIME)
+    @interface List {
+        FieldsValueMatch[] value();
+    }
     /*a meta-annotation used to group multiple instances of @FieldsValueMatch annotations together.
     This grouping allows you to apply multiple instances of @FieldsValueMatch to a target entity or field.*/
 
@@ -52,7 +55,5 @@ public @interface FieldsValueMatch {
     /*Exactly, you've got the idea.
     In Java annotations, value() is indeed not a method that you call or invoke like a regular method using dot notation (.).
     Instead, it serves as a placeholder or a conventionally named method that indicates where you provide actual values when you use the annotation.*/
-    @interface List {
-        FieldsValueMatch[] value();
-    }
+
 }

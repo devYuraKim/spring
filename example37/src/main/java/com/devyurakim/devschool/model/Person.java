@@ -59,11 +59,11 @@ public class Person extends BaseEntity{
     @Transient //DB에 반영하지 않는 경우 사용
     private String confirmPwd;
 
-    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST, targetEntity = Roles.class)
-    @JoinColumn(name = "role_id", referencedColumnName = "roleId",nullable = false)
-    private Roles roles;
-
-    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL, targetEntity = Address.class)
-    @JoinColumn(name = "address_id", referencedColumnName = "addressId",nullable = true)
-    private Address address;
+//    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST, targetEntity = Roles.class)
+//    @JoinColumn(name = "role_id", referencedColumnName = "roleId",nullable = false)
+//    private Roles roles;
+//
+//    @OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL, targetEntity = Address.class)
+//    @JoinColumn(name = "address_id", referencedColumnName = "addressId",nullable = true)
+//    private Address address;
 }

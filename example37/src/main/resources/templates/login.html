@@ -51,6 +51,8 @@ Author URL: http://w3layouts.com
                             th:text="${errorMessage}" />
                         <li class="alert alert-success" role="alert" th:if="${!#strings.isEmpty(logoutMessage)}"
                             th:text="${logoutMessage}" />
+                        <li class="alert alert-success" role="alert" th:if="${!#strings.isEmpty(registerMessage)}"
+                            th:text="${registerMessage}" />
                         <input type="text" name="username" id="username" placeholder="Username"
                                class="login-input" />
                         <input type="password" name="password" id="password" placeholder="Password"

@@ -21,17 +21,23 @@ public class LoginController {
     //SecurityFilterChain에 설정한 /login?error=true인 경우, error에 true 대입
     //SecurityFilterChain에 설정한 /login?logout=true인 경우, logout에 true 대입
     public String displayLoginPage(@RequestParam(value = "error", required = false) String error,
-                                   @RequestParam(value = "logout", required = false) String logout, Model model) {
+                                   @RequestParam(value = "logout", required = false) String logout,
+                                   @RequestParam(value = "register", required = false) String register,
+                                   Model model) {
         String errorMessage = null;
         String logoutMessage = null;
+        String registerMessage = null;
         if (error != null) {
             errorMessage = "Username or Password is incorrect !!";
+        }else if (logout != null) {
+            logoutMessage = "로그아웃이 성공적으로 이루어졌습니다!";
+        }else if (register != null) {
+            registerMessage = "회원가입이 성공적으로 이루어졌습니다. Login with registered credentials";
         }
-        if (logout != null) {
-            logoutMessage = "You have been successfully logged out !!";
-        }
+
         model.addAttribute("errorMessage", errorMessage);
         model.addAttribute("logoutMessage", logoutMessage);
+        model.addAttribute("registerMessage", registerMessage);
         return "login.html";
     }
 

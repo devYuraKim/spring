@@ -46,6 +46,7 @@ Author URL: http://w3layouts.com
             <div class="col-md-7 login-center">
 
                 <form th:action="@{/public/createUser}" method="post" class="signin-form" th:object="${person}">
+
                     <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
                         <p class="text-uppercase">Personal Details</p>
                     </div>
@@ -74,9 +75,12 @@ Author URL: http://w3layouts.com
                                 <input type="text" th:field="*{confirmEmail}" placeholder="이메일 확인"
                                        class="contact-input" />
                                 <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('confirmEmail')}" th:errors="*{confirmEmail}"> </div>
-
                             </div>
+
+                            <div class="alert alert-danger" role="alert" th:if="${emailMismatchError != null}" th:text="${emailMismatchError}"> </div>
+
                         </div>
+
                         <div class="row">
                             <div class="col-sm-6">
                                 <input type="password" th:field="*{pwd}" placeholder="비밀번호"
@@ -88,12 +92,14 @@ Author URL: http://w3layouts.com
                                 <input type="password" th:field="*{confirmPwd}" placeholder="비밀번호 확인"
                                        class="contact-input" />
                                 <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('confirmPwd')}" th:errors="*{confirmPwd}"> </div>
-
                             </div>
+
+                            <div class="alert alert-danger" role="alert" th:if="${passwordMismatchError != null}" th:text="${passwordMismatchError}"> </div>
 
                         </div>
 
                     </div>
+
                     <div class="col-md-3 login-center text-start">
                         <button class="btn btn-style btn-style-3">Register</button>
                     </div>
