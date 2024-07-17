@@ -69,12 +69,14 @@ public class Person extends BaseEntity{
     child entity를 DB에서 삭제할 것인지 아닌지를 결정
     */
 
+    /*OneToOne으로 정의하면 해당 foreign key column에 자동으로 unique constraint가 생겨 진짜로 1:1 관계를 맺게 해준다.
+    * 그래서 이 세팅으로는 각 role 당 하나씩의 person만 생성 가능함! */
     @OneToOne(cascade = CascadeType.PERSIST, targetEntity = Roles.class)
     @JoinColumn(name = "role_id", referencedColumnName = "roleId", nullable = false)
     private Roles roles;
 
     @OneToOne(cascade = CascadeType.ALL, targetEntity = Address.class)
-    @JoinColumn(name = "address_id", referencedColumnName = "addressId",nullable = true)
+    @JoinColumn(name = "address_id", referencedColumnName = "addressId", nullable = true)
     private Address address;
 
 }

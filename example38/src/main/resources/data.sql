@@ -28,3 +28,6 @@ INSERT INTO `holidays` (`day`,`reason`,`type`,`created_at`, `created_by`)
 INSERT INTO `roles` (`role_name`,`created_at`, `created_by`) VALUES ('ADMIN',CURDATE(),'DBA');
 
 INSERT INTO `roles` (`role_name`,`created_at`, `created_by`) VALUES ('STUDENT',CURDATE(),'DBA');
+
+INSERT INTO `person` (`name`,`email`,`mobile_number`,`pwd`,`role_id`,`created_at`, `created_by`)
+  VALUES ('admin','admin@devschool.com','01011111111','admin', 1 ,CURDATE(),'DBA');
