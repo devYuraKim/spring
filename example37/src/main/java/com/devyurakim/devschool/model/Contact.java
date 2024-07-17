@@ -19,7 +19,7 @@ import lombok.Data;
 public class Contact extends BaseEntity{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int contactId;
     /*
         * @NotNull: Checks if a given field is not null but allows empty values & zero elements inside collections.

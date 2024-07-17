@@ -10,6 +10,9 @@ INSERT INTO `holidays` (`day`,`reason`,`type`,`created_at`, `created_by`)
 INSERT INTO `holidays` (`day`,`reason`,`type`,`created_at`, `created_by`)
  VALUES (' Dec 25 ','Christmas','FESTIVAL',CURDATE(),'DBA');
 
+ INSERT INTO `holidays` (`day`,`reason`,`type`,`created_at`, `created_by`)
+  VALUES (' Jun 21 ','Birthday','FESTIVAL',CURDATE(),'DBA');
+
 INSERT INTO `holidays` (`day`,`reason`,`type`,`created_at`, `created_by`)
  VALUES (' Jan 17 ','Martin Luther King Jr. Day','FEDERAL',CURDATE(),'DBA');
 
@@ -21,3 +24,7 @@ INSERT INTO `holidays` (`day`,`reason`,`type`,`created_at`, `created_by`)
 
 INSERT INTO `holidays` (`day`,`reason`,`type`,`created_at`, `created_by`)
   VALUES (' Nov 11 ','Veterans Day','FEDERAL',CURDATE(),'DBA');
+
+INSERT INTO `roles` (`role_name`,`created_at`, `created_by`) VALUES ('ADMIN',CURDATE(),'DBA');
+
+INSERT INTO `roles` (`role_name`,`created_at`, `created_by`) VALUES ('STUDENT',CURDATE(),'DBA');

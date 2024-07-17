@@ -16,7 +16,7 @@ public class Address extends BaseEntity{
     /*Parent Entity에만 정의했으므로 uni-directional*/
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO,generator="native")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int addressId;
 
     @NotBlank(message="Address1 must not be blank")

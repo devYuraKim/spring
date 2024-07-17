@@ -27,7 +27,7 @@ import lombok.Data;
 public class Person extends BaseEntity{
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO,generator="native")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int personId;
 
     @NotBlank(message="Name must not be blank")
@@ -57,16 +57,24 @@ public class Person extends BaseEntity{
     @Transient //DB에 반영하지 않는 경우 사용
     private String confirmPwd;
 
+    //Parent Entity에만 정의했으므로 uni-directional
+
+    /*
+    >> JoinColumn: specifies foreign key column
+    >> name: name of the foreign key column
+    >> referencedColumnName: field name of the target entity class
+
+    >> cascade: propogate entity state changes from Parent to Child
+    >> orphanRemoval: Parent collection으로부터 Child entity가 지워졌을 때, 즉 둘 사이의 연관관계가 지워졌을 때,
+    child entity를 DB에서 삭제할 것인지 아닌지를 결정
+    */
+
     @OneToOne(cascade = CascadeType.PERSIST, targetEntity = Roles.class)
     @JoinColumn(name = "role_id", referencedColumnName = "roleId", nullable = false)
     private Roles roles;
-    /*cascade: propogate entity state changes from Parent to Child*/
 
-    /*Parent Entity에만 정의했으므로 uni-directional*/
     @OneToOne(cascade = CascadeType.ALL, targetEntity = Address.class)
     @JoinColumn(name = "address_id", referencedColumnName = "addressId",nullable = true)
     private Address address;
-    /*JoinColumn: specifies foreign key column
-    * name: name of the foreign key column
-    * referencedColumnName: field name of the target entity class*/
+
 }

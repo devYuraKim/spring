@@ -13,7 +13,7 @@ public class Roles extends BaseEntity {
     /*Parent Entity에만 정의했으므로 uni-directional*/
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO,generator="native")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int roleId;
 
     private String roleName;
