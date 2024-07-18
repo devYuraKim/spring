@@ -40,7 +40,8 @@ public class DevSchoolUsernamePwdAuthenticationProvider implements Authenticatio
         //if(person!=null && person.getPersonId()>0 && pwd.equals(person.getPwd())){
         if(person!=null && person.getPersonId()>0 && passwordEncoder.matches(pwd, person.getPwd())){
             //return new UsernamePasswordAuthenticationToken(person.getName(), pwd, getGrantedAuthorities(person.getRoles()));
-            return new UsernamePasswordAuthenticationToken(person.getName(), null, getGrantedAuthorities(person.getRoles()));
+            //return new UsernamePasswordAuthenticationToken(person.getName(), null, getGrantedAuthorities(person.getRoles()));
+            return new UsernamePasswordAuthenticationToken(email, null, getGrantedAuthorities(person.getRoles()));
         }else{
             throw new BadCredentialsException("invalid credentials");
         }
