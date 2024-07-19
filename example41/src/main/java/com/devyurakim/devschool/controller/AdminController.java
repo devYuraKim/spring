@@ -96,14 +96,14 @@ public class AdminController {
 
     @RequestMapping("/deleteStudent")
     String deleteStudent(@RequestParam int personId, HttpSession session){
-        Optional<Person> findResult = personRepository.findById(personId);
-        Person deleteStudent = findResult.get();
+        Optional<Person> personOptional = personRepository.findById(personId);
+        Person toBeDeleted = personOptional.get();
 
-        deleteStudent.setEazyClass(null);
-        personRepository.save(deleteStudent);
+        toBeDeleted.setEazyClass(null);
+        personRepository.save(toBeDeleted);
 
-        EazyClass eazyClass = (EazyClass) session.getAttribute("EazyClass");
-        eazyClass.getPersons().remove(deleteStudent);
+        EazyClass eazyClass = (EazyClass) session.getAttribute("eazyClass");
+        eazyClass.getPersons().remove(toBeDeleted);
         EazyClass eazyClassSaved = eazyClassRepository.save(eazyClass);
         session.setAttribute("eazyClass", eazyClassSaved);
 
