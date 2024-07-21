@@ -9,6 +9,7 @@ import com.devyurakim.devschool.repository.PersonRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -114,7 +115,9 @@ public class AdminController {
 
     @GetMapping("/displayCourses")
     public String displayCourses(Model model){
-        List<Courses> courses = coursesRepository.findAll();
+        //List<Courses> courses = coursesRepository.findByOrderByName();
+        //아래 method에서 name을 parameter로 받아서 변경하면 그것이 dynamic sorting!
+        List<Courses> courses = coursesRepository.findAll(Sort.by("name").descending());
         model.addAttribute("courses", courses);
         model.addAttribute("course", new Courses());
         return "courses_secure.html";
