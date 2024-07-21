@@ -37,12 +37,16 @@ Author URL: http://w3layouts.com
 </section>
 <!-- //inner banner -->
 
+
+
 <!-- welcome block -->
 <section class="w3l-contact py-5" id="contact">
     <div class="container py-md-5 py-4">
         <div class="title-main text-center mx-auto mb-md-5 mb-4" style="max-width:500px;">
             <h3 class="title-style" th:text="${'Welcome - ' + username}"></h3>
             <p class="" th:text="${'You logged in as - ' + roles}"></p>
+            <p class="" th:if="${!#strings.isEmpty(enrolledClass)}" th:text="${'Your assigned class is - [' + enrolledClass+']'}"></p>
+
         </div>
 
     </div>
@@ -103,6 +107,22 @@ Author URL: http://w3layouts.com
                 </div>
                 <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_ADMIN')">
                     <a th:href="@{/admin/displayCourses}">
+                        <div class="overview-item overview-item--c2">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix">
+                                    <div class="icon">
+                                        <i class="fas fa-envelope-open-text"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h2>Courses</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-lg-3" sec:authorize="hasRole('ROLE_STUDENT')">
+                    <a th:href="@{/student/displayCourses}">
                         <div class="overview-item overview-item--c2">
                             <div class="overview__inner">
                                 <div class="overview-box clearfix">
