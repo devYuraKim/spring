@@ -47,6 +47,8 @@ DB related operations and
 //}
 
 import com.devyurakim.devschool.model.Contact;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -55,4 +57,6 @@ import java.util.List;
 @Repository
 public interface ContactRepository extends CrudRepository<Contact, Integer> {
     List<Contact> findByStatus(String status);
+    /*Pageable을 사용하면 Page로 Entity를 감쌀 것*/
+    Page<Contact> findByStatus(String status, Pageable pageable);
 }
