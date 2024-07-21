@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Slf4j
 @Controller
@@ -123,19 +122,62 @@ public class AdminController {
 
     @RequestMapping("/addNewCourse")
     public String addNewCourse(@ModelAttribute Courses course, Model model){
-        coursesRepository.save(course);
+        Courses newCourse = coursesRepository.save(course);
         return "redirect:/admin/displayCourses";
     }
 
     @GetMapping("/viewStudents")
-    public String viewStudents(Model model, @RequestParam int id){
+    public String viewStudents(Model model, @RequestParam int id, HttpSession session, @RequestParam(required = false) String error){
+
+        String errorMessage = null;
+
         Optional<Courses> courseOptional = coursesRepository.findById(id);
         Courses course = courseOptional.get();
+        model.addAttribute("course", course);
+        session.setAttribute("course", course);
+        model.addAttribute("person", new Person());
 
-        Set<Person> persons = course.getPersons();
-        model.addAttribute("persons", persons);
+        if(error!=null){
+            errorMessage = "Invalid Email address";
+            model.addAttribute("errorMessage", errorMessage);
+        }
+            return "courses_students.html";
+    }
 
-        return "course_students.html";
+    @PostMapping("/addStudentToCourse")
+    public String addStudentToCourse(@ModelAttribute Person person, Model model, HttpSession session){
+
+        Courses course = (Courses) session.getAttribute("course");
+        String email = person.getEmail();
+        Person newStudent = personRepository.readByEmail(email);
+
+        if(newStudent==null || !(newStudent.getPersonId()>0)){
+            return "redirect:/admin/viewStudents?id="+course.getCourseId()+"&error=true";
+        }
+
+        newStudent.getCourses().add(course);
+        course.getPersons().add(newStudent);
+        personRepository.save(newStudent);
+        session.setAttribute("course", course);
+
+        return "redirect:/admin/viewStudents?id="+course.getCourseId();
+    }
+
+    @RequestMapping("/deleteStudentFromCourse")
+    public String deleteStudentFromCourse(@RequestParam int personId, HttpSession session){
+
+        Courses course = (Courses) session.getAttribute("course");
+
+        Optional<Person> personOptional = personRepository.findById(personId);
+        Person person = personOptional.get();
+        person.getCourses().remove(course);
+        course.getPersons().remove(person);
+        //coursesRepository.save(course); //Cascade가 Persist이기 때문에 위의 personRepository.save(person) 때문에 저장될 거임!
+        //session.setAttribute("course", course);
+
+        personRepository.save(person);
+
+        return "redirect:/admin/viewStudents?id="+course.getCourseId();
     }
 
 }

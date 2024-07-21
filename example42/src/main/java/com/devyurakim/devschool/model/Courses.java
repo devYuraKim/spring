@@ -1,5 +1,6 @@
 package com.devyurakim.devschool.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,6 +23,7 @@ public class Courses extends BaseEntity {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @JsonManagedReference
     @ManyToMany(mappedBy = "courses", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Set<Person> persons = new HashSet<>();
 
