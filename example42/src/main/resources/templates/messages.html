@@ -10,7 +10,7 @@
     <!-- Google fonts -->
     <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- Template CSS Style link -->
-    <link rel="stylesheet" href="assets/css/style-starter.css">
+    <link rel="stylesheet" href="/assets/css/style-starter.css">
 </head>
 
 <body>
@@ -78,28 +78,63 @@
     <!-- pagination -->
     <div class="pagination-style text-center mt-5">
         <ul>
-            <li>
-                <a th:if="${currentPage > 1}" th:href="@{'/displayMessages/page/' + ${currentPage - 1}+'?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">
-                    <span class="fa fa-angle-double-left" aria-hidden="true"></span>
-                </a>
-                <a th:unless="${currentPage > 1}" class="not-allowed" disabled="">
-                    <span class="fa fa-angle-double-left" aria-hidden="true"></span>
-                </a>
-            </li>
-            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-            <li>
-                <a th:if="${currentPage != i}" th:href="@{'/displayMessages/page/' + ${i}+'?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
-                <a class="active" th:unless="${currentPage != i}">[[${i}]]</a>
-            </li>
-            </span>
-            <li>
-                <a th:if="${currentPage < totalPages}" th:href="@{'/displayMessages/page/' + ${currentPage + 1}+'?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">
-                    <span class="fa fa-angle-double-right" aria-hidden="true"></span>
-                </a>
-                <a th:unless="${currentPage < totalPages}" class="not-allowed" disabled="">
-                    <span class="fa fa-angle-double-right" aria-hidden="true"></span>
-                </a>
-            </li>
+
+
+            <!-- Calculate the start and end pages to display -->
+            <span th:with="startPage=${currentPage <= 5 ? 1 : (currentPage - 5)},
+               endPage=${currentPage + 4 >= totalPages ? totalPages : (currentPage <= 5 ? 10 : currentPage + 4)}">
+
+    <!-- First Page Button -->
+    <li>
+        <a th:if="${currentPage > 1}" th:href="@{'/displayMessages/page/1?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">
+            <span class="fa fa-very-left" aria-hidden="true"></span>
+        </a>
+        <a th:unless="${currentPage > 1}" class="not-allowed" disabled="">
+            <span class="fa fa-very-left" aria-hidden="true"></span>
+        </a>
+    </li>
+
+    <!-- Previous Page Button -->
+    <li>
+        <a th:if="${currentPage > 1}" th:href="@{'/displayMessages/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">
+            <span class="fa fa-angle-double-left" aria-hidden="true"></span>
+        </a>
+        <a th:unless="${currentPage > 1}" class="not-allowed" disabled="">
+            <span class="fa fa-angle-double-left" aria-hidden="true"></span>
+        </a>
+    </li>
+
+                <!-- Page Links -->
+    <span th:each="i: ${#numbers.sequence(startPage, endPage)}">
+        <li>
+            <a th:if="${currentPage != i}" th:href="@{'/displayMessages/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+            <a class="active" th:unless="${currentPage != i}">[[${i}]]</a>
+        </li>
+    </span>
+
+                <!-- Next Page Button -->
+    <li>
+        <a th:if="${currentPage < totalPages}" th:href="@{'/displayMessages/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">
+            <span class="fa fa-angle-double-right" aria-hidden="true"></span>
+        </a>
+        <a th:unless="${currentPage < totalPages}" class="not-allowed" disabled="">
+            <span class="fa fa-angle-double-right" aria-hidden="true"></span>
+        </a>
+    </li>
+
+    <!-- Last Page Button -->
+    <li>
+        <a th:if="${currentPage < totalPages}" th:href="@{'/displayMessages/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">
+            <span class="fa fa-very-right" aria-hidden="true"></span>
+        </a>
+        <a th:unless="${currentPage < totalPages}" class="not-allowed" disabled="">
+            <span class="fa fa-very-right" aria-hidden="true"></span>
+        </a>
+    </li>
+</span>
+
+
+
         </ul>
     </div>
     <!-- //pagination -->
@@ -143,11 +178,11 @@
 <!-- //move top -->
 
 <!-- common jquery plugin -->
-<script src="assets/js/jquery-3.3.1.min.js"></script>
+<script src="/assets/js/jquery-3.3.1.min.js"></script>
 <!-- //common jquery plugin -->
 
 <!-- theme switch js (light and dark)-->
-<script src="assets/js/theme-change.js"></script>
+<script src="/assets/js/theme-change.js"></script>
 <!-- //theme switch js (light and dark)-->
 
 <!-- MENU-JS -->
@@ -190,7 +225,7 @@
 <!-- //disable body scroll which navbar is in active -->
 
 <!-- bootstrap -->
-<script src="assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
 <!-- //bootstrap -->
 <!-- //Js scripts -->
 </body>

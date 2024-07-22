@@ -5,6 +5,7 @@ import com.devyurakim.devschool.service.ContactService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -64,9 +65,16 @@ public class ContactController {
             return "redirect:/contact";
         }
 
-        @GetMapping("/displayMessages")
-        public String displayMessages(Model model) {
-            List<Contact> contactMsgs = contactService.findMsgsWithOpenStatus();
+        @GetMapping("/displayMessages/page/{pageNum}")
+        public String displayMessages(Model model, @PathVariable int pageNum, @RequestParam String sortField, @RequestParam String sortDir) {
+            Page<Contact> msgPage = contactService.findMsgsWithOpenStatus(pageNum, sortField, sortDir);
+            List<Contact> contactMsgs = msgPage.getContent();
+            model.addAttribute("currentPage", pageNum);
+            model.addAttribute("totalPages", msgPage.getTotalPages());
+            model.addAttribute("totalMsgs", msgPage.getTotalElements());
+            model.addAttribute("sortField", sortField);
+            model.addAttribute("sortDir", sortDir);
+            model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
             model.addAttribute("contactMsgs",contactMsgs);
             return "messages.html";
         }
@@ -76,7 +84,8 @@ public class ContactController {
         public String closeMsg(@RequestParam int id) {
             contactService.updateMsgStatus(id);
             //audit //contactService.updateMsgStatus(id,authentication.getName());
-            return "redirect:/displayMessages";
+            //return "redirect:/displayMessages";
+            return "redirect:/displayMessages/page/1?sortField=name&sortDir=desc";
         }
 
 }

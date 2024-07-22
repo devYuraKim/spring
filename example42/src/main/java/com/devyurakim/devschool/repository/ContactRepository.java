@@ -57,6 +57,9 @@ import java.util.List;
 @Repository
 public interface ContactRepository extends CrudRepository<Contact, Integer> {
     List<Contact> findByStatus(String status);
-    /*Pageable을 사용하면 Page로 Entity를 감쌀 것*/
+
+    /* Pageable을 사용하면 Page로 Entity를 감쌀 것
+    * In Spring Data JPA, when you include a Pageable parameter in a repository method, the return type should be a Page object.
+    * This pattern is consistent regardless of the specific query method defined. */
     Page<Contact> findByStatus(String status, Pageable pageable);
 }

@@ -5,6 +5,10 @@ import com.devyurakim.devschool.model.Contact;
 import com.devyurakim.devschool.repository.ContactRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -66,10 +70,25 @@ public class ContactService {
         return isSaved;
     }
 
-    public List<Contact> findMsgsWithOpenStatus(){
-//        List<Contact> contactMsgs = contactRepository.findMsgsWithStatus(DevSchoolConstants.OPEN);
-        List<Contact> contactMsgs = contactRepository.findByStatus(DevSchoolConstants.OPEN);
-        return contactMsgs;
+//    public List<Contact> findMsgsWithOpenStatus(){
+////        List<Contact> contactMsgs = contactRepository.findMsgsWithStatus(DevSchoolConstants.OPEN);
+//        List<Contact> contactMsgs = contactRepository.findByStatus(DevSchoolConstants.OPEN);
+//        return contactMsgs;
+//    }
+
+    public Page<Contact> findMsgsWithOpenStatus(int pageNum, String sortField, String sortDir){
+        int pageSize = 5;
+        /* public static PageRequest of(int pageNumber, int pageSize, Sort sort) {
+        return new PageRequest(pageNumber, pageSize, sort); }
+        >> pageNumber: index of the page to be retrived
+           PageRequest class의 static method of의 page는 0부터 시작! 그래서 첫 페이지pageNum(==1)를 로딩하고 싶으면 -1 해야 처음부터 나온다
+        >> pageSize: 한 페이지에 포함되는 item의 개수
+        */
+
+        Pageable pageable = PageRequest.of(pageNum-1, pageSize,
+                sortDir.equals("asc") ? Sort.by(sortField).ascending() : Sort.by(sortField).descending());
+        Page<Contact> msgPage = contactRepository.findByStatus(DevSchoolConstants.OPEN, pageable);
+        return msgPage;
     }
 
     /*JPA에서 update할 때는 기존의 객체를 찾아와서 수정이 필요한 부분 처리하고 그 객체를 다시 저장*/

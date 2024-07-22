@@ -12359,6 +12359,14 @@ li {
   content: "\f101";
 }
 
+.fa-very-left:before {
+  content: "start";
+}
+
+.fa-very-right:before {
+  content: "end";
+}
+
 .fa-angle-double-up:before {
   content: "\f102";
 }
