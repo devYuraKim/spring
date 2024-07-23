@@ -2,7 +2,7 @@
 
 <configuration>
 
-    <property name="LOGS" value="/Users/yura/Desktop" />
+    <property name="LOGS" value="/Users/yurakim/Desktop" />
 
     <appender name="Console"
               class="ch.qos.logback.core.ConsoleAppender">
